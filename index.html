@@ -3,198 +3,313 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Programmieren lernen – Der erfolgreiche Programmierer</title>
-    <meta name="description" content="Der Erfolgreiche Programmierer – Lerne Programmieren und organisiere dein Leben für echten Erfolg.">
-    
+
+    <title>Deutsch & Webentwicklung lernen | Erfolg Entwickler</title>
+
+    <!-- SEO -->
+    <meta name="description" content="Lerne Deutsch, HTML und CSS von Grund auf. Moderne Kurse für Anfänger.">
+    <meta name="keywords" content="Deutsch lernen, HTML, CSS, Programmieren">
+    <meta name="author" content="Erfolg Entwickler">
+
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;500;700&display=swap" rel="stylesheet">
 
-    <style>  
+    <style>
         :root {
-            --primary-color: #00d4ff; 
-            --bg-dark: #0a2540;
-            --text-light: #f5f7fa;
-            --accent-gradient: linear-gradient(135deg, #0a2540 0%, #051421 100%);
+            --primary: #00d4ff;
+            --dark: #0a2540;
+            --dark-bg: #051421;
+            --light-bg: #f5f7fa;
+            --text-dark: #111;
+            --card-bg-dark: #0e1f33;
+        }
+
+        * {
+            box-sizing: border-box;
         }
 
         body {
-            font-family: 'Inter', sans-serif;
             margin: 0;
-            background: #ffffff;
-            color: #333;
-            line-height: 1.8;
-        }
-    
-        /* تنسيق الهيدر العلوي */
-        header {
-            background: var(--accent-gradient);
-            color: rgb(255, 255, 255);
-            padding: 40px 0 100px 0; /* مساحة داخلية */
-            clip-path: polygon(0 0, 100% 0, 100% 85%, 0 100%);
-        }
-
-        /* حاوية لتوزيع العناصر: العنوان يسار والزر يمين */
-        .nav-container {
-            display: flex;
-            justify-content: space-between; /* توزيع متباعد */
-            align-items: center;
-            max-width: 1100px;
-            margin: 0 auto;
-            padding: 0 20px;
-        }
-
-        .logo {
-            font-size: 22px;
-            font-weight: 700;
-            margin: 0;
-            letter-spacing: -1px;
-        }
-
-        .logo span {
-            color: var(--primary-color);
-        }
-
-        /* تنسيق القائمة المنسدلة (Dropdown) */
-        .dropdown {
-            position: relative;
-            display: inline-block;
-        }
-
-        .dropbtn {
-            background-color: var(--primary-color);
-            color: var(--bg-dark);
-            padding: 10px 20px;
-            font-size: 15px;
-            border: none;
-            border-radius: 8px;
-            cursor: pointer;
-            font-weight: 700;
-            transition: 0.3s;
-        }
-
-        .dropbtn:hover {
-            background-color: white;
-        }
-
-        .dropdown-content {
-            display: none;
-            position: absolute;
-            right: 0; /* تفتح باتجاه اليسار لتبقى داخل الصفحة */
-            background-color: white;
-            min-width: 200px;
-            box-shadow: 0px 10px 25px rgba(0,0,0,0.2);
-            z-index: 10;
-            border-radius: 8px;
-            overflow: hidden;
-            margin-top: 5px;
-        }
-
-        .dropdown-content a {
-            color: #333;
-            padding: 12px 16px;
-            text-decoration: none;
-            display: block;
-            font-size: 14px;
-            border-bottom: 1px solid #eee;
-            text-align: left;
-        }
-
-        .dropdown-content a:last-child { border-bottom: none; }
-
-        .dropdown-content a:hover {
-            background-color: #f1f1f1;
-            color: var(--bg-dark);
-        }
-
-        .dropdown:hover .dropdown-content {
-            display: block;
-        }
-
-        /* العنوان الرئيسي في وسط الهيدر */
-        .hero-text {
-            text-align: center;
-            margin-top: 60px;
-            padding: 0 500px;
-        }
-
-        .hero-text p {
-            font-size: 1.2rem;
-            opacity: 0.8;
-        }
-
-        /* تنسيق الأقسام */
-        section {
-            padding: 80px 20px;
-            max-width: 800px;
-            margin: auto;
-            text-align: center;
-        }
-
-        h2 {
-            font-size: 2.2rem;
-            color: var(--bg-dark);
-        }
-
-        blockquote {
-            font-style: italic;
-            font-size: 1.4rem;
-            color: #555;
-            border-left: 4px solid var(--primary-color);
-            padding: 10px 20px;
-            margin: 40px 0;
-            background: #f9f9f9;
-        }
-
-        .btn-main {
-            display: inline-block;
-            background: var(--bg-dark);
+            font-family: Inter, sans-serif;
+            background: var(--dark-bg);
             color: white;
-            padding: 15px 40px;
+            transition: 0.3s;
+        }
+
+        body.light {
+            background: var(--light-bg);
+            color: var(--text-dark);
+        }
+
+        /* ===== Navbar ===== */
+        header {
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            background: linear-gradient(135deg, var(--dark), var(--dark-bg));
+            padding: 18px;
+        }
+
+        body.light header {
+            background: #ffffff;
+        }
+
+        .nav {
+            max-width: 1200px;
+            margin: auto;
+            display: flex;
+            align-items: center;
+            position: relative;
+        }
+
+        h1 {
+            font-size: 34px;
+            margin: 0;
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        h1 span {
+            color: var(--primary);
+        }
+
+        .controls {
+            margin-left: auto;
+            display: flex;
+            gap: 18px;
+        }
+
+        .theme-btn {
+            font-size: 22px;
+            cursor: pointer;
+        }
+
+        .menu-btn {
+            width: 32px;
+            cursor: pointer;
+        }
+
+        .menu-btn span {
+            display: block;
+            height: 3px;
+            background: currentColor;
+            margin: 6px 0;
+            transition: 0.4s;
+        }
+
+        .menu-btn.active span:nth-child(1) {
+            transform: rotate(45deg) translate(6px, 6px);
+        }
+        .menu-btn.active span:nth-child(2) {
+            opacity: 0;
+        }
+        .menu-btn.active span:nth-child(3) {
+            transform: rotate(-45deg) translate(6px, -6px);
+        }
+
+        /* ===== Menu ===== */
+        .menu {
+            position: absolute;
+            top: 70px;
+            right: 20px;
+            width: 230px;
+            background: white;
+            color: #333;
+            border-radius: 12px;
+            overflow: hidden;
+            max-height: 0;
+            opacity: 0;
+            transition: 0.4s;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.25);
+        }
+
+        .menu.open {
+            max-height: 300px;
+            opacity: 1;
+        }
+
+        .menu a {
+            display: block;
+            padding: 15px;
             text-decoration: none;
+            color: inherit;
+            font-weight: 500;
+            border-bottom: 1px solid #eee;
+        }
+
+        .menu a:hover {
+            background: #f1f1f1;
+        }
+
+        /* ===== Hero ===== */
+        .hero {
+            max-width: 1200px;
+            margin: 100px auto 80px;
+            padding: 0 20px;
+            text-align: center;
+        }
+
+        .hero h2 {
+            font-size: 2.8rem;
+            margin-bottom: 15px;
+        }
+
+        .hero p {
+            font-size: 1.3rem;
+            opacity: 0.9;
+        }
+
+        .cta {
+            display: inline-block;
+            margin-top: 30px;
+            padding: 14px 40px;
+            background: var(--primary);
+            color: #001;
             border-radius: 50px;
+            text-decoration: none;
             font-weight: 700;
             transition: 0.3s;
         }
 
-        .btn-main:hover {
-            background: var(--primary-color);
-            color: var(--bg-dark);
+        .cta:hover {
             transform: translateY(-3px);
         }
-    </style>    
+
+        /* ===== Courses ===== */
+        .courses {
+            max-width: 1200px;
+            margin: auto;
+            padding: 40px 20px 100px;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 25px;
+        }
+
+        .card {
+            background: var(--card-bg-dark);
+            border-radius: 16px;
+            padding: 30px;
+            transition: 0.3s;
+        }
+
+        body.light .card {
+            background: #ffffff;
+        }
+
+        .card:hover {
+            transform: translateY(-8px);
+        }
+
+        .card h3 {
+            margin-top: 0;
+            font-size: 1.4rem;
+        }
+
+        .card p {
+            opacity: 0.85;
+        }
+
+        .card a {
+            display: inline-block;
+            margin-top: 15px;
+            text-decoration: none;
+            font-weight: 600;
+            color: var(--primary);
+        }
+
+        /* ===== Footer ===== */
+        footer {
+            text-align: center;
+            padding: 25px;
+            opacity: 0.7;
+            font-size: 0.9rem;
+        }
+
+        @media (max-width: 600px) {
+            h1 {
+                font-size: 26px;
+            }
+            .hero h2 {
+                font-size: 2rem;
+            }
+        }
+    </style>
 </head>
+
 <body>
 
 <header>
-    <div class="nav-container">
-        <h1 class="logo">Der <span>Erfolgreiche</span> Programmierer</h1>
-        
-        <div class="dropdown">
-            <button class="dropbtn">Kurse wählen ▾</button>
-            <div class="dropdown-content">
-                <a href="#">Webentwicklung Fullstack</a>
-                <a href="#">Python für Anfänger</a>
-                <a href="#">JavaScript Mastery</a>
-                <a href="#">Karriere-Coaching</a>
+    <div class="nav">
+        <h1><span>Erfolg</span> Entwickler</h1>
+
+        <div class="controls">
+            <div class="theme-btn" id="themeBtn">🌙</div>
+            <div class="menu-btn" id="menuBtn">
+                <span></span><span></span><span></span>
             </div>
         </div>
     </div>
 
-    <div class="hero-text">
-        <p>Code dein Leben. Baue deine Zukunft.</p>
-    </div>
+    <nav class="menu" id="menu">
+        <a href="deutsch.html">Deutsch lernen</a>
+        <a href="html.html">HTML Grundlagen</a>
+        <a href="css.html">CSS Design</a>
+    </nav>
 </header>
 
-<section>
-    <h2>Warum Programmieren?</h2>
-    <p>Programmieren ist die Superkraft des 21. Jahrhunderts. Es geht nicht nur um Code, sondern um Freiheit و Erfolg.</p>
-    
-    <blockquote>
-        "Disziplin schlägt Motivation – jeden Tag."
-    </blockquote>
-
-    <br>
-    <a href="#" class="btn-main">Jetzt starten</a>
+<section class="hero">
+    <h2>Deutsch & Webentwicklung lernen</h2>
+    <p>Starte deine Reise mit Deutsch, HTML und CSS – modern & praxisnah</p>
+    <a href="#courses" class="cta">Jetzt starten</a>
 </section>
+
+<section class="courses" id="courses">
+    <div class="card">
+        <h3>Deutsch lernen</h3>
+        <p>Grammatik, Alltagssprache und Kommunikation von Grund auf.</p>
+        <a href="deutsch.html">Zum Kurs →</a>
+    </div>
+
+    <div class="card">
+        <h3>HTML Grundlagen</h3>
+        <p>Struktur und Aufbau moderner Webseiten verstehen.</p>
+        <a href="html.html">Zum Kurs →</a>
+    </div>
+
+    <div class="card">
+        <h3>CSS Design</h3>
+        <p>Layouts, Farben und Animationen professionell gestalten.</p>
+        <a href="css.html">Zum Kurs →</a>
+    </div>
+</section>
+
+<footer>
+    © 2026 Erfolg Entwickler – Lernen mit Qualität
+</footer>
+
+<script>
+    const menuBtn = document.getElementById("menuBtn");
+    const menu = document.getElementById("menu");
+    const themeBtn = document.getElementById("themeBtn");
+
+    menuBtn.onclick = () => {
+        menuBtn.classList.toggle("active");
+        menu.classList.toggle("open");
+    };
+
+    const savedTheme = localStorage.getItem("theme");
+    if (savedTheme === "light") {
+        document.body.classList.add("light");
+        themeBtn.textContent = "☀️";
+    }
+
+    themeBtn.onclick = () => {
+        document.body.classList.toggle("light");
+        const isLight = document.body.classList.contains("light");
+        themeBtn.textContent = isLight ? "☀️" : "🌙";
+        localStorage.setItem("theme", isLight ? "light" : "dark");
+    };
+</script>
 
 </body>
 </html>
