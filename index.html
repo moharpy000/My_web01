@@ -4,35 +4,40 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Deutsch & Webentwicklung lernen | Erfolg Entwickler</title>
+    <title>CodeZimmer | Logik & Webentwicklung</title>
 
-    <!-- SEO -->
-    <meta name="description" content="Lerne Deutsch, HTML und CSS von Grund auf. Moderne Kurse für Anfänger.">
-    <meta name="keywords" content="Deutsch lernen, HTML, CSS, Programmieren">
-    <meta name="author" content="Erfolg Entwickler">
-
+    <meta name="description" content="Lerne Programmieren und Logik im CodeZimmer. Deine Werkstatt für HTML, CSS und Deutsch.">
+    <meta name="keywords" content="CodeZimmer, Programmierung, Logik, HTML lernen, CSS lernen, Deutsch für Entwickler">
+    
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;500;700&display=swap" rel="stylesheet">
 
     <style>
         :root {
             --primary: #00d4ff;
-            --dark: #0a2540;
             --dark-bg: #051421;
-            --light-bg: #f5f7fa;
-            --text-dark: #111;
-            --card-bg-dark: #0e1f33;
+            --card-bg: #0e1f33;
+            --light-bg: #f8fafd;
+            --text-light: #e0e6ed;
+            --text-dark: #1a202c;
+            --transition: 0.3s ease;
+        }
+
+        html {
+            scroll-behavior: smooth;
         }
 
         * {
             box-sizing: border-box;
+            -webkit-tap-highlight-color: transparent;
         }
 
         body {
             margin: 0;
-            font-family: Inter, sans-serif;
+            font-family: 'Inter', sans-serif;
             background: var(--dark-bg);
-            color: white;
-            transition: 0.3s;
+            color: var(--text-light);
+            transition: background var(--transition), color var(--transition);
+            line-height: 1.6;
         }
 
         body.light {
@@ -40,275 +45,285 @@
             color: var(--text-dark);
         }
 
-        /* ===== Navbar ===== */
+        /* ===== Header & Nav ===== */
         header {
             position: sticky;
             top: 0;
             z-index: 1000;
-            background: linear-gradient(135deg, var(--dark), var(--dark-bg));
-            padding: 18px;
+            background: rgba(10, 37, 64, 0.9);
+            backdrop-filter: blur(10px);
+            padding: 15px 0;
+            border-bottom: 1px solid rgba(255,255,255,0.05);
         }
 
         body.light header {
-            background: #ffffff;
+            background: rgba(255, 255, 255, 0.9);
+            border-bottom: 1px solid #ddd;
         }
 
-        .nav {
-            max-width: 1200px;
+        .nav-container {
+            max-width: 1100px;
             margin: auto;
             display: flex;
+            justify-content: space-between;
             align-items: center;
-            position: relative;
+            padding: 0 20px;
         }
 
-        h1 {
-            font-size: 34px;
-            margin: 0;
-            position: absolute;
-            left: 50%;
-            transform: translateX(-50%);
+        .logo {
+            font-size: 26px;
+            font-weight: 700;
+            text-decoration: none;
+            color: white;
+            letter-spacing: -1px;
         }
 
-        h1 span {
+        body.light .logo { color: var(--text-dark); }
+
+        .logo span {
             color: var(--primary);
+            font-weight: 300;
         }
 
         .controls {
-            margin-left: auto;
             display: flex;
-            gap: 18px;
+            align-items: center;
+            gap: 20px;
         }
 
         .theme-btn {
-            font-size: 22px;
+            font-size: 20px;
             cursor: pointer;
+            user-select: none;
         }
 
+        /* Hamburger Menu */
         .menu-btn {
-            width: 32px;
             cursor: pointer;
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+            width: 25px;
         }
 
         .menu-btn span {
             display: block;
-            height: 3px;
+            height: 2px;
+            width: 100%;
             background: currentColor;
-            margin: 6px 0;
-            transition: 0.4s;
+            transition: var(--transition);
         }
 
-        .menu-btn.active span:nth-child(1) {
-            transform: rotate(45deg) translate(6px, 6px);
-        }
-        .menu-btn.active span:nth-child(2) {
-            opacity: 0;
-        }
-        .menu-btn.active span:nth-child(3) {
-            transform: rotate(-45deg) translate(6px, -6px);
-        }
+        .menu-btn.active span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+        .menu-btn.active span:nth-child(2) { opacity: 0; }
+        .menu-btn.active span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
 
-        /* ===== Menu ===== */
-        .menu {
+        /* Dropdown Menu */
+        .dropdown {
             position: absolute;
-            top: 70px;
+            top: 100%;
             right: 20px;
-            width: 230px;
-            background: white;
-            color: #333;
-            border-radius: 12px;
+            width: 200px;
+            background: var(--card-bg);
+            border-radius: 10px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+            display: none;
+            flex-direction: column;
             overflow: hidden;
-            max-height: 0;
-            opacity: 0;
-            transition: 0.4s;
-            box-shadow: 0 10px 25px rgba(0,0,0,0.25);
+            border: 1px solid rgba(255,255,255,0.1);
         }
 
-        .menu.open {
-            max-height: 300px;
-            opacity: 1;
-        }
+        body.light .dropdown { background: white; border-color: #eee; }
 
-        .menu a {
-            display: block;
-            padding: 15px;
+        .dropdown.show { display: flex; }
+
+        .dropdown a {
+            padding: 15px 20px;
             text-decoration: none;
             color: inherit;
-            font-weight: 500;
-            border-bottom: 1px solid #eee;
+            font-size: 14px;
+            border-bottom: 1px solid rgba(255,255,255,0.05);
         }
 
-        .menu a:hover {
-            background: #f1f1f1;
-        }
+        .dropdown a:hover { background: var(--primary); color: var(--dark-bg); }
 
-        /* ===== Hero ===== */
+        /* ===== Hero Section ===== */
         .hero {
-            max-width: 1200px;
-            margin: 100px auto 80px;
-            padding: 0 20px;
             text-align: center;
+            padding: 100px 20px;
+            max-width: 800px;
+            margin: auto;
         }
 
-        .hero h2 {
-            font-size: 2.8rem;
-            margin-bottom: 15px;
+        .hero h1 {
+            font-size: clamp(2.5rem, 8vw, 4rem);
+            margin: 0 0 20px;
+            line-height: 1.1;
         }
 
         .hero p {
-            font-size: 1.3rem;
-            opacity: 0.9;
+            font-size: 1.2rem;
+            opacity: 0.8;
+            margin-bottom: 30px;
         }
 
-        .cta {
-            display: inline-block;
-            margin-top: 30px;
-            padding: 14px 40px;
+        .btn-main {
+            padding: 15px 35px;
             background: var(--primary);
-            color: #001;
-            border-radius: 50px;
+            color: var(--dark-bg);
             text-decoration: none;
             font-weight: 700;
-            transition: 0.3s;
+            border-radius: 6px;
+            display: inline-block;
+            transition: var(--transition);
         }
 
-        .cta:hover {
+        .btn-main:hover {
             transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0, 212, 255, 0.4);
         }
 
-        /* ===== Courses ===== */
-        .courses {
-            max-width: 1200px;
-            margin: auto;
-            padding: 40px 20px 100px;
+        /* ===== Cards Grid ===== */
+        .grid {
+            max-width: 1100px;
+            margin: 0 auto 100px;
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
             gap: 25px;
+            padding: 0 20px;
         }
 
         .card {
-            background: var(--card-bg-dark);
-            border-radius: 16px;
-            padding: 30px;
-            transition: 0.3s;
+            background: var(--card-bg);
+            padding: 35px;
+            border-radius: 15px;
+            border: 1px solid rgba(255,255,255,0.03);
+            transition: var(--transition);
         }
 
-        body.light .card {
-            background: #ffffff;
-        }
+        body.light .card { background: white; border-color: #eee; }
 
         .card:hover {
-            transform: translateY(-8px);
+            border-color: var(--primary);
+            transform: translateY(-5px);
         }
 
         .card h3 {
-            margin-top: 0;
-            font-size: 1.4rem;
+            margin: 0 0 15px;
+            color: var(--primary);
         }
 
-        .card p {
-            opacity: 0.85;
-        }
-
-        .card a {
+        .card-link {
             display: inline-block;
             margin-top: 15px;
+            color: var(--primary);
             text-decoration: none;
             font-weight: 600;
-            color: var(--primary);
         }
 
         /* ===== Footer ===== */
         footer {
             text-align: center;
-            padding: 25px;
-            opacity: 0.7;
+            padding: 50px 20px;
+            border-top: 1px solid rgba(255,255,255,0.05);
             font-size: 0.9rem;
+            opacity: 0.6;
         }
 
-        @media (max-width: 600px) {
-            h1 {
-                font-size: 26px;
-            }
-            .hero h2 {
-                font-size: 2rem;
-            }
-        }
     </style>
 </head>
-
 <body>
 
 <header>
-    <div class="nav">
-        <h1><span>Erfolg</span> Entwickler</h1>
+    <div class="nav-container">
+        <a href="#" class="logo">Code<span>Zimmer</span></a>
 
         <div class="controls">
             <div class="theme-btn" id="themeBtn">🌙</div>
             <div class="menu-btn" id="menuBtn">
                 <span></span><span></span><span></span>
             </div>
+            <div class="dropdown" id="dropdown">
+                <a href="#deutsch">Deutsch-Stube</a>
+                <a href="#html">HTML-Ecke</a>
+                <a href="#css">CSS-Studio</a>
+                <a href="#logik">Logik-Labor</a>
+            </div>
         </div>
     </div>
-
-    <nav class="menu" id="menu">
-        <a href="deutsch.html">Deutsch lernen</a>
-        <a href="html.html">HTML Grundlagen</a>
-        <a href="css.html">CSS Design</a>
-    </nav>
 </header>
 
-<section class="hero">
-    <h2>Deutsch & Webentwicklung lernen</h2>
-    <p>Starte deine Reise mit Deutsch, HTML und CSS – modern & praxisnah</p>
-    <a href="#courses" class="cta">Jetzt starten</a>
-</section>
+<main>
+    <section class="hero">
+        <h1>Willkommen im <span style="color:var(--primary)">CodeZimmer</span></h1>
+        <p>Dein strukturierter Raum für Logik, Webentwicklung und die deutsche Sprache. Fang heute an.</p>
+        <a href="#start" class="btn-main">Zimmer betreten</a>
+    </section>
 
-<section class="courses" id="courses">
-    <div class="card">
-        <h3>Deutsch lernen</h3>
-        <p>Grammatik, Alltagssprache und Kommunikation von Grund auf.</p>
-        <a href="deutsch.html">Zum Kurs →</a>
-    </div>
+    <div class="grid" id="start">
+        <div class="card">
+            <h3>Deutsch-Stube</h3>
+            <p>Die Basis für deine Karriere. Lerne Fachbegriffe و Grammatik für Entwickler.</p>
+            <a href="#" class="card-link">Eintreten →</a>
+        </div>
 
-    <div class="card">
-        <h3>HTML Grundlagen</h3>
-        <p>Struktur und Aufbau moderner Webseiten verstehen.</p>
-        <a href="html.html">Zum Kurs →</a>
-    </div>
+        <div class="card">
+            <h3>HTML-Ecke</h3>
+            <p>Lerne, wie man Webseiten richtig strukturiert. Sauberer Code von Anfang an.</p>
+            <a href="#" class="card-link">Eintreten →</a>
+        </div>
 
-    <div class="card">
-        <h3>CSS Design</h3>
-        <p>Layouts, Farben und Animationen professionell gestalten.</p>
-        <a href="css.html">Zum Kurs →</a>
+        <div class="card">
+            <h3>CSS-Studio</h3>
+            <p>Design und Layout. Mache deine Projekte modern, responsiv und schön.</p>
+            <a href="#" class="card-link">Eintreten →</a>
+        </div>
+
+        <div class="card">
+            <h3>Logik-Labor</h3>
+            <p>Der Kern der Programmierung. Algorithmen und Logik einfach erklärt.</p>
+            <a href="#" class="card-link">Eintreten →</a>
+        </div>
     </div>
-</section>
+</main>
 
 <footer>
-    © 2026 Erfolg Entwickler – Lernen mit Qualität
+    © 2026 CodeZimmer – Wo Logik zu Hause ist.
 </footer>
 
 <script>
-    const menuBtn = document.getElementById("menuBtn");
-    const menu = document.getElementById("menu");
-    const themeBtn = document.getElementById("themeBtn");
+    const menuBtn = document.getElementById('menuBtn');
+    const dropdown = document.getElementById('dropdown');
+    const themeBtn = document.getElementById('themeBtn');
+    const body = document.body;
 
-    menuBtn.onclick = () => {
-        menuBtn.classList.toggle("active");
-        menu.classList.toggle("open");
-    };
+    // Toggle Menu
+    menuBtn.addEventListener('click', () => {
+        menuBtn.classList.toggle('active');
+        dropdown.classList.toggle('show');
+    });
 
-    const savedTheme = localStorage.getItem("theme");
-    if (savedTheme === "light") {
-        document.body.classList.add("light");
-        themeBtn.textContent = "☀️";
+    // Close menu on click outside
+    window.onclick = (e) => {
+        if (!e.target.closest('.controls')) {
+            menuBtn.classList.remove('active');
+            dropdown.classList.remove('show');
+        }
     }
 
+    // Theme Switcher
     themeBtn.onclick = () => {
-        document.body.classList.toggle("light");
-        const isLight = document.body.classList.contains("light");
+        body.classList.toggle('light');
+        const isLight = body.classList.contains('light');
         themeBtn.textContent = isLight ? "☀️" : "🌙";
-        localStorage.setItem("theme", isLight ? "light" : "dark");
+        localStorage.setItem('theme', isLight ? 'light' : 'dark');
     };
+
+    // Load Theme
+    if(localStorage.getItem('theme') === 'light') {
+        body.classList.add('light');
+        themeBtn.textContent = "☀️";
+    }
 </script>
 
 </body>
