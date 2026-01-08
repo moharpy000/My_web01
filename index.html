@@ -2,40 +2,199 @@
 <html lang="de">
 <head>
     <meta charset="UTF-8">
-     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Erfolgreiche Programmierer</title>
-            <meta name="description" content="Der Erfolgreiche Programmierer – Lerne Programmieren und organisiere dein Leben für echten Erfolg.">
-              <link href="http://fonts.googleapis.com/css2?family=Inter:wght@300;500;700&display=swap" rel="stylesheet">
-     <!-- CSS (الشكل والتنسيق)-->
-<style>  
-    body {font-family: 'Inter', sans-serif;
-        margin: 0;
-            background: #f5f7fa;
-                color: #222;
-                    line-height: 1.7; }
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Programmieren lernen – Der erfolgreiche Programmierer</title>
+    <meta name="description" content="Der Erfolgreiche Programmierer – Lerne Programmieren und organisiere dein Leben für echten Erfolg.">
     
-    header {background: #0a2540;
-     color: white;
-        padding: 80px 20px;
-            text-align: center;}
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;500;700&display=swap" rel="stylesheet">
 
-            header h1 {font-size: 40px;}
-section {padding: 60px 20px;
-             max-width: 900px;
-                 margin: auto;} 
-</style>    
+    <style>  
+        :root {
+            --primary-color: #00d4ff; 
+            --bg-dark: #0a2540;
+            --text-light: #f5f7fa;
+            --accent-gradient: linear-gradient(135deg, #0a2540 0%, #051421 100%);
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            margin: 0;
+            background: #ffffff;
+            color: #333;
+            line-height: 1.8;
+        }
+    
+        /* تنسيق الهيدر العلوي */
+        header {
+            background: var(--accent-gradient);
+            color: rgb(255, 255, 255);
+            padding: 40px 0 100px 0; /* مساحة داخلية */
+            clip-path: polygon(0 0, 100% 0, 100% 85%, 0 100%);
+        }
+
+        /* حاوية لتوزيع العناصر: العنوان يسار والزر يمين */
+        .nav-container {
+            display: flex;
+            justify-content: space-between; /* توزيع متباعد */
+            align-items: center;
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .logo {
+            font-size: 22px;
+            font-weight: 700;
+            margin: 0;
+            letter-spacing: -1px;
+        }
+
+        .logo span {
+            color: var(--primary-color);
+        }
+
+        /* تنسيق القائمة المنسدلة (Dropdown) */
+        .dropdown {
+            position: relative;
+            display: inline-block;
+        }
+
+        .dropbtn {
+            background-color: var(--primary-color);
+            color: var(--bg-dark);
+            padding: 10px 20px;
+            font-size: 15px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 700;
+            transition: 0.3s;
+        }
+
+        .dropbtn:hover {
+            background-color: white;
+        }
+
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            right: 0; /* تفتح باتجاه اليسار لتبقى داخل الصفحة */
+            background-color: white;
+            min-width: 200px;
+            box-shadow: 0px 10px 25px rgba(0,0,0,0.2);
+            z-index: 10;
+            border-radius: 8px;
+            overflow: hidden;
+            margin-top: 5px;
+        }
+
+        .dropdown-content a {
+            color: #333;
+            padding: 12px 16px;
+            text-decoration: none;
+            display: block;
+            font-size: 14px;
+            border-bottom: 1px solid #eee;
+            text-align: left;
+        }
+
+        .dropdown-content a:last-child { border-bottom: none; }
+
+        .dropdown-content a:hover {
+            background-color: #f1f1f1;
+            color: var(--bg-dark);
+        }
+
+        .dropdown:hover .dropdown-content {
+            display: block;
+        }
+
+        /* العنوان الرئيسي في وسط الهيدر */
+        .hero-text {
+            text-align: center;
+            margin-top: 60px;
+            padding: 0 500px;
+        }
+
+        .hero-text p {
+            font-size: 1.2rem;
+            opacity: 0.8;
+        }
+
+        /* تنسيق الأقسام */
+        section {
+            padding: 80px 20px;
+            max-width: 800px;
+            margin: auto;
+            text-align: center;
+        }
+
+        h2 {
+            font-size: 2.2rem;
+            color: var(--bg-dark);
+        }
+
+        blockquote {
+            font-style: italic;
+            font-size: 1.4rem;
+            color: #555;
+            border-left: 4px solid var(--primary-color);
+            padding: 10px 20px;
+            margin: 40px 0;
+            background: #f9f9f9;
+        }
+
+        .btn-main {
+            display: inline-block;
+            background: var(--bg-dark);
+            color: white;
+            padding: 15px 40px;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: 700;
+            transition: 0.3s;
+        }
+
+        .btn-main:hover {
+            background: var(--primary-color);
+            color: var(--bg-dark);
+            transform: translateY(-3px);
+        }
+    </style>    
 </head>
 <body>
-    <header>
-    <h1>Der Erfolgreiche Programmierer</h1>
-    <p>Code dein Leben. Baue deine Zukunft.</p>
+
+<header>
+    <div class="nav-container">
+        <h1 class="logo">Der <span>Erfolgreiche</span> Programmierer</h1>
+        
+        <div class="dropdown">
+            <button class="dropbtn">Kurse wählen ▾</button>
+            <div class="dropdown-content">
+                <a href="#">Webentwicklung Fullstack</a>
+                <a href="#">Python für Anfänger</a>
+                <a href="#">JavaScript Mastery</a>
+                <a href="#">Karriere-Coaching</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="hero-text">
+        <p>Code dein Leben. Baue deine Zukunft.</p>
+    </div>
 </header>
+
 <section>
     <h2>Warum Programmieren?</h2>
-<blockquote>
-    Disziplin schlägt Motivation – jeden Tag.
-</blockquote>
-<a href="#">Jetzt starten</a>
+    <p>Programmieren ist die Superkraft des 21. Jahrhunderts. Es geht nicht nur um Code, sondern um Freiheit و Erfolg.</p>
+    
+    <blockquote>
+        "Disziplin schlägt Motivation – jeden Tag."
+    </blockquote>
+
+    <br>
+    <a href="#" class="btn-main">Jetzt starten</a>
 </section>
+
 </body>
 </html>
